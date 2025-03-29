@@ -4,16 +4,17 @@
     {
         static void Main(string[] args)
         {
+            var nonEmptyValidator = new NewValidator();
             var lengthValidator = new LengthValidator();
             var numericValidator = new NumericValidator();
             var rangeValidator = new RangeValidator(1, 100);
 
-            lengthValidator.SetNext(numericValidator).SetNext(rangeValidator);
+            nonEmptyValidator.SetNext(lengthValidator).SetNext(numericValidator).SetNext(rangeValidator);
 
             Console.WriteLine("Введите данные для валидации:");
             string inputData = Console.ReadLine();
 
-            bool isValid = lengthValidator.Validate(inputData);
+            bool isValid = nonEmptyValidator.Validate(inputData);
 
             if (isValid)
             {
@@ -22,3 +23,4 @@
         }
     }
 }
+
